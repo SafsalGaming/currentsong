@@ -8,6 +8,7 @@ import {
   tokenIsExpiredSoon,
   refreshAccessToken,
 } from "./spotifyAuth";
+import GeniusEmbed from "./GeniusEmbed";
 
 async function fetchCurrentlyPlaying(accessToken) {
   const res = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
@@ -149,6 +150,15 @@ export default function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {item && (
+        <GeniusEmbed
+          trackName={item.name}
+          artistName={item.artists?.[0]?.name}
+          progressMs={progressMs}
+          durationMs={durationMs}
+        />
       )}
     </div>
   );
